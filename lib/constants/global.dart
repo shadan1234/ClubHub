@@ -1,5 +1,6 @@
 
-String uri="192.168.1.8";
+
+String uri = 'http://192.168.1.4:3000';
 class GlobalVariables{
 
 }

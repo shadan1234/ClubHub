@@ -2,6 +2,7 @@ import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/constants/size_config.dart';
 import 'package:clubhub/constants/text_styles.dart';
 import 'package:clubhub/features/auth/screens/login_screen.dart';
+import 'package:clubhub/features/auth/screens/create_account_screen.dart';
 import 'package:clubhub/features/onboarding/components/onbarding_data.dart';
 import 'package:flutter/material.dart';
 
@@ -93,7 +94,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     ),
     child: TextButton(child: Text(currentIndex==controller.items.length-1?'Get Started':'Continue', style: TextStyle(color: AppColors.background),), onPressed: (){
   setState(() {
-    currentIndex!=controller.items.length-1? currentIndex++:Navigator.pushNamed(context, LoginScreen.routeName);
+    currentIndex!=controller.items.length-1? currentIndex++:Navigator.pushNamed(context, CreateAccountScreen.routeName);
 
   }); 
     },),

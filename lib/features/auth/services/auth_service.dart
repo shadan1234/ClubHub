@@ -4,6 +4,7 @@ import 'package:clubhub/constants/bottom_page.dart';
 import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
 import 'package:clubhub/constants/utils.dart';
+import 'package:clubhub/features/auth/screens/login_screen.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class AuthService {
           email: email,
          
           );
+        
       http.Response res = await http.post(Uri.parse('$uri/api/signup'),
           body: user.toJson(),
           headers: <String, String>{
@@ -43,7 +45,7 @@ class AuthService {
             showSnackBar(
                 context, 'Account created! Login with same credential');
           });
-      print(res.statusCode);
+      
     } catch (e) {
       showSnackBar(context, e.toString());
     }
@@ -115,4 +117,14 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
+   void logOut({required BuildContext context})async{
+        try {
+           SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+           await sharedPreferences.setString('x-auth-token', '');
+           Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false ,);
+        } catch (e) {
+          showSnackBar(context, e.toString());
+        }
+  }
+
 }

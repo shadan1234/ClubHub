@@ -1,6 +1,8 @@
+import 'package:clubhub/commons/widgets/custom_textfield.dart';
 import 'package:clubhub/constants/size_config.dart';
 import 'package:clubhub/constants/text_styles.dart';
-import 'package:clubhub/features/auth/screens/register_screen.dart';
+import 'package:clubhub/features/auth/screens/create_account_screen.dart';
+import 'package:clubhub/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 
@@ -16,10 +18,26 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _loginFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
@@ -102,7 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                    color: const Color.fromRGBO(143, 148, 251, 1)),
+                                    color:
+                                        const Color.fromRGBO(143, 148, 251, 1)),
                                 boxShadow: [
                                   const BoxShadow(
                                       color: Color.fromRGBO(143, 148, 251, .2),
@@ -120,24 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                             bottom: BorderSide(
                                                 color: Color.fromRGBO(
                                                     143, 148, 251, 1)))),
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: "Email",
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey[700])),
-                                    ),
+                                    child: CustomTextField(hintText: 'Email', controller: emailController)
                                   ),
                                   Container(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: "Password",
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey[700])),
-                                    ),
+                                    child: CustomTextField(hintText: 'Password', controller: passwordController)
                                   )
                                 ],
                               ),
@@ -150,20 +156,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           duration: const Duration(milliseconds: 1900),
                           child: Container(
                             height: 50,
+                            width: 80*SizeConfig.blockSizeHorizontal,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: const LinearGradient(colors: [
                                   Color.fromRGBO(143, 148, 251, 1),
                                   Color.fromRGBO(143, 148, 251, .6),
                                 ])),
-                            child: Center(
-                              child: TextButton(
-                                onPressed: () {},
-                                child: const Text("Login",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
-                              ),
+                            child: TextButton(
+                              onPressed: () {
+                                 if (_loginFormKey.currentState!.validate()) {
+                              signInUser();
+                            }
+                              },
+                              child: const Text("Login",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
                             ),
                           )),
                       SizedBox(height: 6 * SizeConfig.blockSizeHorizontal),
@@ -178,7 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextButton.styleFrom(
                                   padding: const EdgeInsets.all(0)),
                               onPressed: () {
-                                Navigator.pushNamed(context, CreateAccountScreen.routeName);
+                                Navigator.pushNamed(
+                                    context, CreateAccountScreen.routeName);
                               },
                               child: const Text(
                                 'Create an Account',

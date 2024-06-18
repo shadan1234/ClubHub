@@ -1,18 +1,42 @@
-
 import 'package:clubhub/constants/app_theme.dart';
+import 'package:clubhub/constants/bottom_page.dart';
 import 'package:clubhub/constants/size_config.dart';
+import 'package:clubhub/features/auth/services/auth_service.dart';
+import 'package:clubhub/features/club_manager/screens/club_manager_screen.dart';
 import 'package:clubhub/features/onboarding/screens/onboarding.dart';
+import 'package:clubhub/providers/user_provider.dart';
 import 'package:clubhub/router.dart';
+import 'package:clubhub/super_admin/screens/super_admin_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    authService.getUserData(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -20,9 +44,26 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'ClubHub',
       theme: AppTheme.themeData,
-      home:  OnBoardingScreen(),
-      onGenerateRoute: (settings) => generateRoute(settings)
+      onGenerateRoute: (settings) => generateRoute(settings),
+      home: _getHomeScreen(),
+    );
+  }
+
+  Widget _getHomeScreen() {
+    return Consumer<UserProvider>(
+      builder: (context, userProvider, _) {
+        if (userProvider.user.token.isNotEmpty) {
+          if (userProvider.user.type == 'user') {
+            return BottomBar();
+          } else if (userProvider.user.type == 'club-manager') {
+            return ClubManagerScreen();
+          } else {
+            return SuperAdminScreen();
+          }
+        } else {
+          return const OnBoardingScreen();
+        }
+      },
     );
   }
 }
-

@@ -99,6 +99,7 @@
 //     );
 //   }
 // }
+import 'package:clubhub/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatelessWidget {
@@ -107,7 +108,7 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-    return const Placeholder();
+   final AuthService authService=AuthService();
+    return Center(child: ElevatedButton(child: Text('logout'),onPressed: (){authService.logOut(context: context);},),);
   }
 }
