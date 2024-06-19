@@ -40,6 +40,8 @@ dependencies:
   http: ^1.2.1
   cloudinary_public: ^0.23.1
   shared_preferences: ^2.2.3
+  curved_navigation_bar: ^1.0.6
+  file_picker: ^8.0.5
 
 dev_dependencies:
   flutter_test:

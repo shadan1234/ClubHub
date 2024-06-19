@@ -30,7 +30,7 @@ class AuthService {
           type: "",
           token: "",
           email: email,
-         
+         image:''
           );
         
       http.Response res = await http.post(Uri.parse('$uri/api/signup'),

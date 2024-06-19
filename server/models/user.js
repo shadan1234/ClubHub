@@ -32,6 +32,10 @@ const userSchema = mongoose.Schema({
         message: "Please enter a valid password",
       },
   },
+  image:{
+    type:String,
+    default:""
+  },
   
   type: {
     type: String,

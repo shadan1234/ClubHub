@@ -6,7 +6,7 @@ import 'package:clubhub/features/club_manager/screens/club_manager_screen.dart';
 import 'package:clubhub/features/onboarding/screens/onboarding.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:clubhub/router.dart';
-import 'package:clubhub/super_admin/screens/super_admin_screen.dart';
+import 'package:clubhub/features/super_admin/screens/super_admin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
