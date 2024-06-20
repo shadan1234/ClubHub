@@ -29,7 +29,11 @@ const clubSchema = mongoose.Schema({
     type: String,
     default: "",
   },
-  //cart
+  managerId: {
+    type: String,
+    required: true,
+  },
+
 
 });
 

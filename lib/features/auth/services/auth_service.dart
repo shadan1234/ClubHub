@@ -5,7 +5,8 @@ import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
 import 'package:clubhub/constants/utils.dart';
 import 'package:clubhub/features/auth/screens/login_screen.dart';
-import 'package:clubhub/features/club_manager/screens/club_manager_screen.dart';
+import 'package:clubhub/features/club_manager/screens/application_screen.dart';
+import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
@@ -88,7 +89,7 @@ class AuthService {
               context,
               User.fromJson(res.body).type=='user'?
               BottomBar.routeName:
-              User.fromJson(res.body).type=='super'?  SuperAdminBottomBar.routeName : ClubManagerScreen.routeName,
+              User.fromJson(res.body).type=='super'?  SuperAdminBottomBar.routeName :ClubManagerBottomBar.routeName,
               (route) => false,
             );
           });

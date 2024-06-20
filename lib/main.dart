@@ -2,7 +2,8 @@ import 'package:clubhub/constants/app_theme.dart';
 import 'package:clubhub/constants/bottom_page.dart';
 import 'package:clubhub/constants/size_config.dart';
 import 'package:clubhub/features/auth/services/auth_service.dart';
-import 'package:clubhub/features/club_manager/screens/club_manager_screen.dart';
+import 'package:clubhub/features/club_manager/screens/application_screen.dart';
+import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/onboarding/screens/onboarding.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:clubhub/router.dart';
@@ -56,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           if (userProvider.user.type == 'user') {
             return BottomBar();
           } else if (userProvider.user.type == 'club-manager') {
-            return ClubManagerScreen();
+            return ClubManagerBottomBar();
           } else {
             return SuperAdminBottomBar();
           }

@@ -2,7 +2,8 @@ import 'package:clubhub/commons/widgets/clubs_details_screen.dart';
 import 'package:clubhub/constants/bottom_page.dart';
 import 'package:clubhub/features/auth/screens/login_screen.dart';
 import 'package:clubhub/features/auth/screens/create_account_screen.dart';
-import 'package:clubhub/features/club_manager/screens/club_manager_screen.dart';
+import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
+import 'package:clubhub/features/club_manager/screens/application_screen.dart';
 import 'package:clubhub/features/profile/screens/profile_screen.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:clubhub/models/club.dart';
@@ -31,13 +32,14 @@ case BottomBar.routeName:
     case SuperAdminBottomBar.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const SuperAdminBottomBar());
-    case ClubManagerScreen.routeName:
-      return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => const ClubManagerScreen());
+  
             case ClubDetailScreen.routeName:
              var club = routeSettings.arguments as Club;
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) =>  ClubDetailScreen(club:  club,));
+           case ClubManagerBottomBar.routeName:
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const ClubManagerBottomBar());
     default:
       return MaterialPageRoute(
           settings: routeSettings,

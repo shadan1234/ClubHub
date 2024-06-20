@@ -45,7 +45,7 @@ class _SuperAdminBottomBarState extends State<SuperAdminBottomBar> {
               color: Colors.white,
             ),
             Icon(
-              Icons.logout,
+              Icons.person,
               size: 26,
               color: Colors.white,
             ),
