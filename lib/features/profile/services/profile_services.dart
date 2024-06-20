@@ -39,20 +39,30 @@ Map<String, String> body = {
       );
       print(response.body);
       // one way of doing this but what if some error happens then also this gets updated that's why resp ko store karo
-    //   User user=userProvider.user;
-    //  User updatedUser= user.copyWith(image: imageUrl);
-    //   userProvider.setUserFromModel(updatedUser);
-    if (response.statusCode == 200) {
-      User updatedUser = User.fromJson(response.body);
-      if (context.mounted) {  // Check if the context is still mounted
-        userProvider.setUserFromModel(updatedUser);
-        showSnackBar(context, 'Profile Pic updated successfully!');
-      }
-    } else {
-      if (context.mounted) {
-        showSnackBar(context, 'Failed to update profile picture');
-      }
-    }
+      User user=userProvider.user;
+     User updatedUser= user.copyWith(image: imageUrl);
+      userProvider.setUserFromModel(updatedUser);
+    // if (response.statusCode == 200) {
+    //   User updatedUser = User.fromJson(response.body);
+    //   if (context.mounted) {  // Check if the context is still mounted
+    //     userProvider.setUserFromModel(updatedUser);
+    //     print(userProvider.user.image);
+    //     showSnackBar(context, 'Profile Pic updated successfully!');
+    //   }
+    // } else {
+    //   if (context.mounted) {
+    //     showSnackBar(context, 'Failed to update profile picture');
+    //   }
+    // }
+     httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+           
+            showSnackBar(context, 'Product Added successfully!');
+            // Navigator.pop(context);
+          });
+    
   } catch (e) {
     if (context.mounted) {
       showSnackBar(context, e.toString());

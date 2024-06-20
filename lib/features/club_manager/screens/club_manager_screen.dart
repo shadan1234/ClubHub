@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ClubManagerScreen extends StatelessWidget {
+  static const String routeName='/club-manager';
   const ClubManagerScreen({super.key});
 
   @override

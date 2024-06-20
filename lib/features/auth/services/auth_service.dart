@@ -5,6 +5,8 @@ import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
 import 'package:clubhub/constants/utils.dart';
 import 'package:clubhub/features/auth/screens/login_screen.dart';
+import 'package:clubhub/features/club_manager/screens/club_manager_screen.dart';
+import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,22 +17,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   // sign up user
-  void signUpUser({
+  Future<void> signUpUser(
+    
+    {
+      String? type,
+      String? idOfClub,
     required BuildContext context,
     required String email,
     required String password,
     required String name,
-  }) async {
+  }
+  
+  ) async {
     try {
       User user = User(
           id: '',
           name: name,
           password: password,
           
-          type: "",
+          type: type??"",
           token: "",
           email: email,
-         image:''
+         image:'', clubOwned: idOfClub??'', clubs: []
           );
         
       http.Response res = await http.post(Uri.parse('$uri/api/signup'),
@@ -78,7 +86,9 @@ class AuthService {
 
             Navigator.pushNamedAndRemoveUntil(
               context,
-              BottomBar.routeName,
+              User.fromJson(res.body).type=='user'?
+              BottomBar.routeName:
+              User.fromJson(res.body).type=='super'?  SuperAdminBottomBar.routeName : ClubManagerScreen.routeName,
               (route) => false,
             );
           });
@@ -128,3 +138,5 @@ class AuthService {
   }
 
 }
+
+

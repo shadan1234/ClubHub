@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema({
     trim: true,
   },
   email: {
+    
     required: true,
     type: String,
     trim: true,
@@ -41,7 +42,17 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "user",
   },
-  //cart
+
+  clubs:{
+    type:[String],
+    default:[]
+  },
+
+  clubOwned:{
+    type:String,
+    default:''
+  }
+ 
 
 });
 

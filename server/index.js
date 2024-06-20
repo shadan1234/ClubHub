@@ -3,6 +3,8 @@ const mongoose=require("mongoose");
 
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
+const adminRouter=require("./routes/admin");
+const userRouter = require("./routes/user");
 // const adminRouter = require("./routes/admin");
 // const productRouter = require("./routes/product");
 // const userRouter = require("./routes/user");
@@ -17,9 +19,9 @@ const DB="mongodb+srv://superAdmin:superAdmin123@cluster0.adtmt60.mongodb.net/?r
 app.use(express.json());
 app.use(authRouter);
 app.use(profileRouter);
-// app.use(adminRouter);
+app.use(adminRouter);
 // app.use(productRouter);
-// app.use(userRouter);
+app.use(userRouter); 
 
 
 

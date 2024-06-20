@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class User {
@@ -9,15 +8,19 @@ class User {
   final String type;
   final String token;
   final String image;
+  final String clubOwned;
+  final List<String> clubs;
 
-  User( {
+  User({
     required this.id,
     required this.name,
     required this.password,
     required this.type,
     required this.token,
     required this.email,
-    required this.image
+    required this.image,
+    required this.clubOwned,
+    required this.clubs,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,7 +31,9 @@ class User {
       'password': password,
       'type': type,
       'token': token,
-      'image':image,
+      'image': image,
+      'clubOwned': clubOwned,
+      'clubs': clubs,
     };
   }
 
@@ -40,13 +45,16 @@ class User {
       password: map['password'] ?? '',
       type: map['type'] ?? '',
       token: map['token'] ?? '',
-      image:map['image']??''
+      image: map['image'] ?? '',
+      clubOwned: map['clubOwned'] ?? '',
+      clubs: List<String>.from(map['clubs'] ?? []),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  factory User.fromJson(String source) =>
+      User.fromMap(json.decode(source));
 
   User copyWith({
     String? id,
@@ -56,6 +64,8 @@ class User {
     String? type,
     String? token,
     String? image,
+    String? clubOwned,
+    List<String>? clubs,
   }) {
     return User(
       id: id ?? this.id,
@@ -64,7 +74,9 @@ class User {
       password: password ?? this.password,
       type: type ?? this.type,
       token: token ?? this.token,
-      image: image?? this.image
+      image: image ?? this.image,
+      clubOwned: clubOwned ?? this.clubOwned,
+      clubs: clubs ?? this.clubs,
     );
   }
 }
