@@ -5,6 +5,7 @@ const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const adminRouter=require("./routes/admin");
 const userRouter = require("./routes/user");
+const applicationRouter = require("./routes/application");
 // const adminRouter = require("./routes/admin");
 // const productRouter = require("./routes/product");
 // const userRouter = require("./routes/user");
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(profileRouter);
 app.use(adminRouter);
-// app.use(productRouter);
+app.use(applicationRouter);
 app.use(userRouter); 
 
 

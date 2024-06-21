@@ -8,10 +8,11 @@ class Club {
  final String type;
  final String description;
  final String workDoneByClub;
+  final String managerId;
 
   Club({
     required this.id,
-    required this.image, required this.nameOfClub, required this.type, required this.description, required this.workDoneByClub});
+    required this.image, required this.nameOfClub, required this.type, required this.description, required this.workDoneByClub,required this.managerId,});
   
 
  
@@ -23,6 +24,7 @@ class Club {
       'type': type,
       'description': description,
       'workDoneByClub': workDoneByClub,
+      'managerId': managerId,
     };
   }
 
@@ -34,6 +36,7 @@ class Club {
       type: map['type'] as String,
       description: map['description'] as String,
       workDoneByClub: map['workDoneByClub'] as String,
+      managerId: map['managerId'] as String,
     );
   }
 
@@ -47,7 +50,8 @@ class Club {
     String? type,
     String? description,
     String? workDoneByClub,
-    String? id
+    String? id,
+    String? managerId,
   }) {
     return Club(
       id: id?? this.id,
@@ -55,7 +59,7 @@ class Club {
       nameOfClub: nameOfClub ?? this.nameOfClub,
       type: type ?? this.type,
       description: description ?? this.description,
-      workDoneByClub: workDoneByClub ?? this.workDoneByClub,
+      workDoneByClub: workDoneByClub ?? this.workDoneByClub, managerId: managerId??this.managerId,
     );
   }
 }

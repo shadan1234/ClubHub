@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           if (userProvider.user.type == 'user') {
             return BottomBar();
           } else if (userProvider.user.type == 'club-manager') {
-            return ClubManagerBottomBar();
+            return ClubManagerBottomBar(clubId:  userProvider.user.clubOwned );
           } else {
             return SuperAdminBottomBar();
           }

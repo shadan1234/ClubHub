@@ -89,8 +89,11 @@ class AuthService {
               context,
               User.fromJson(res.body).type=='user'?
               BottomBar.routeName:
-              User.fromJson(res.body).type=='super'?  SuperAdminBottomBar.routeName :ClubManagerBottomBar.routeName,
+              User.fromJson(res.body).type=='super'?  SuperAdminBottomBar.routeName : (ClubManagerBottomBar.routeName ), 
               (route) => false,
+               arguments: User.fromJson(res.body).type == 'club-manager'
+      ? Provider.of<UserProvider>(context, listen: false).user.clubOwned
+      : null,
             );
           });
       // print(res.statusCode);

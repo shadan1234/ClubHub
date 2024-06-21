@@ -1,28 +1,34 @@
 const express = require("express");
 const adminRouter = express.Router();
-
+const User=require('../models/user');
 const admin = require("../middlewares/admin");
 const Club = require("../models/club");
 
-adminRouter.post("/create-club", admin, async (req, res) => {
-  try {
-    // console.log(req);
-    const { image, nameOfClub, type, description } = req.body;
-    if (!image || !nameOfClub || !type || !description) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-    let club = new Club({
-      image,
-      nameOfClub,
-      type,
-      description,
-    });
+adminRouter.post("/create-club-manager", admin, async (req, res) => {
+  const { nameOfClub, type, description, image, emailManager, passwordManager, nameManager } = req.body;
 
-    club = await club.save();
-  
-    res.json({ ...club._doc });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+  try {
+    // Step 1: Create the club
+    const club = new Club({ nameOfClub, type, description, image });
+    const savedClub = await club.save();
+
+    // Step 2: Create the club manager
+    const user = new User({
+      name: nameManager,
+      email: emailManager,
+      password: passwordManager,
+      type: 'club-manager',
+      clubOwned: savedClub._id
+    });
+    const savedUser = await user.save();
+
+    // Step 3: Update the club with the manager's ID
+    savedClub.managerId = savedUser._id;
+    await savedClub.save();
+
+    res.status(201).json({ message: 'Club and manager created successfully', club: savedClub, manager: savedUser });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

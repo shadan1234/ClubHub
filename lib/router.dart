@@ -38,8 +38,13 @@ case BottomBar.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) =>  ClubDetailScreen(club:  club,));
            case ClubManagerBottomBar.routeName:
+           var clubId=routeSettings.arguments as String;
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => const ClubManagerBottomBar());
+          settings: routeSettings, builder: (_) =>  ClubManagerBottomBar(clubId: clubId ,));
+            case ClubManagerApplicationsScreen.routeName:
+             var clubId = routeSettings.arguments as String;
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) =>  ClubManagerApplicationsScreen(clubId:clubId ,));
     default:
       return MaterialPageRoute(
           settings: routeSettings,

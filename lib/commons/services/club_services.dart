@@ -43,51 +43,41 @@ class ClubServices {
     required File image,
     required String emailManager,
     required String passwordManager,
-    required String nameManager
+    required String nameManager,
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       final cloudinary = CloudinaryPublic('dwkaqsoto', 'daqdvyep');
       String imageUrl = '';
 
-      CloudinaryResponse res = await cloudinary
-          .uploadFile(CloudinaryFile.fromFile(image.path, folder: nameOfClub));
-      imageUrl = res.secureUrl;
-
-      Club club = Club(
-        description: description,
-        image: imageUrl,
-        nameOfClub: nameOfClub,
-        type: type,
-        workDoneByClub: '',
-        id: '',
+      CloudinaryResponse res = await cloudinary.uploadFile(
+        CloudinaryFile.fromFile(image.path, folder: nameOfClub),
       );
-  print(imageUrl);
-      http.Response response = await http.post(
-        Uri.parse('$uri/create-club'),
-        headers: <String, String>{
-        
-      'Content-Type': 'application/json; charset=UTF-8',
+      imageUrl = res.secureUrl;
+print(imageUrl);
+      final body = {
+        'nameOfClub': nameOfClub,
+        'type': type,
+        'description': description,
+        'image': imageUrl,
+        'emailManager': emailManager,
+        'passwordManager': passwordManager,
+        'nameManager': nameManager,
+      };
+
+      final response = await http.post(
+        Uri.parse('$uri/create-club-manager'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
-        body: club.toJson(),
+        body: jsonEncode(body),
       );
-      print(response.body);
-      if (response.statusCode == 200) {
-        String id = Club.fromJson(response.body).id;
-
-        // Update the user with the club ID
-        await authService.signUpUser(
-          context: context,
-        
-          type: 'club-manager',
-          email: emailManager,
-          password: passwordManager,
-          name: nameManager,
-          idOfClub: id,
+ print(response.body);
+      if (response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Club and manager created successfully!')),
         );
-
-        
       } else {
         httpErrorHandle(
           response: response,
@@ -100,29 +90,7 @@ class ClubServices {
         showSnackBar(context, e.toString());
       }
     }
-
   }
-  void applyForClub({required BuildContext context, required String id}) async {
-     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final response = await http.post(
-      Uri.parse('$uri/api/apply'),
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': userProvider.user.token, 
-      },
-      body: json.encode({
-        'clubId': id,
-      }),
-    );
 
-    if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Application submitted successfully!')),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to submit application.')),
-      );
-    }
-  }
+ 
 }

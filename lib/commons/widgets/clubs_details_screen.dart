@@ -1,9 +1,11 @@
+import 'package:clubhub/commons/services/club_application_services.dart';
 import 'package:clubhub/commons/services/club_services.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:clubhub/models/club.dart';
 import 'package:clubhub/constants/colors.dart';
+import 'package:provider/provider.dart';
 
 class ClubDetailScreen extends StatefulWidget {
   static const String routeName='/Clubs-Details-Screen';
@@ -16,15 +18,15 @@ class ClubDetailScreen extends StatefulWidget {
 }
 
 class _ClubDetailScreenState extends State<ClubDetailScreen> {
-  ClubServices clubServices=ClubServices();
-
-  void applyForClub(){
-    clubServices.applyForClub(context: context, id: widget.club.id);
+  final ClubApplicationServices clubApplicationServices=ClubApplicationServices();
+  void applyForClub(String name){
+    clubApplicationServices.applyForClub(context: context, clubId: widget.club.id, name:name );
   }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider=UserProvider();
+    UserProvider userProvider=Provider.of<UserProvider>(context,listen: false);
+   
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.club.nameOfClub),
@@ -91,7 +93,7 @@ class _ClubDetailScreenState extends State<ClubDetailScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  applyForClub();
+                  applyForClub(userProvider.user.name);
                 },
                 child: Text('Apply' ,style:TextStyle(fontSize: 18,color: Colors.white),),
                 style: ElevatedButton.styleFrom(

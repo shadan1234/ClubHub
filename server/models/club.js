@@ -31,7 +31,7 @@ const clubSchema = mongoose.Schema({
   },
   managerId: {
     type: String,
-    required: true,
+    default: "",
   },
 
 
