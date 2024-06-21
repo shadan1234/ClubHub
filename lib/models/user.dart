@@ -10,8 +10,9 @@ class User {
   final String image;
   final String clubOwned;
   final List<String> clubs;
+  final String fcmToken;
 
-  User({
+  User( {
     required this.id,
     required this.name,
     required this.password,
@@ -21,6 +22,7 @@ class User {
     required this.image,
     required this.clubOwned,
     required this.clubs,
+    required this.fcmToken
   });
 
   Map<String, dynamic> toMap() {
@@ -34,6 +36,7 @@ class User {
       'image': image,
       'clubOwned': clubOwned,
       'clubs': clubs,
+      'fcmToken':fcmToken
     };
   }
 
@@ -48,6 +51,7 @@ class User {
       image: map['image'] ?? '',
       clubOwned: map['clubOwned'] ?? '',
       clubs: List<String>.from(map['clubs'] ?? []),
+      fcmToken: map['fcmToken'] ?? ''
     );
   }
 
@@ -66,6 +70,7 @@ class User {
     String? image,
     String? clubOwned,
     List<String>? clubs,
+    String? fcmToken
   }) {
     return User(
       id: id ?? this.id,
@@ -77,6 +82,7 @@ class User {
       image: image ?? this.image,
       clubOwned: clubOwned ?? this.clubOwned,
       clubs: clubs ?? this.clubs,
+      fcmToken: fcmToken?? this.fcmToken
     );
   }
 }

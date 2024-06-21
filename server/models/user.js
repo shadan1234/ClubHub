@@ -51,6 +51,11 @@ const userSchema = mongoose.Schema({
   clubOwned:{
     type:String,
     default:''
+  },
+
+  fcmToken:{
+    type:String,
+    required:true,
   }
  
 

@@ -2,6 +2,7 @@ import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/features/auth/services/auth_service.dart';
 import 'package:clubhub/features/explore/screens/explore_screen.dart';
 import 'package:clubhub/features/home_users/screens/home_screen.dart';
+import 'package:clubhub/features/notifications/screens/notifications_screen.dart';
 import 'package:clubhub/features/profile/screens/profile_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     HomeScreen(),
    ExploreScreen(),
-    Center(
-      child: Text('Notifications'),
-    ),
+   NotificationScreen(),
   ProfileScreen()
   ];
   void updatePage(int page) {

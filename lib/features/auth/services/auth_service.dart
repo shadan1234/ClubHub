@@ -10,6 +10,7 @@ import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.da
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -30,6 +31,9 @@ class AuthService {
   }
   
   ) async {
+     String? token = await FirebaseMessaging.instance.getToken();
+    print("FCM Token: $token");
+   
     try {
       User user = User(
           id: '',
@@ -39,7 +43,7 @@ class AuthService {
           type: type??"",
           token: "",
           email: email,
-         image:'', clubOwned: idOfClub??'', clubs: []
+         image:'', clubOwned: idOfClub??'', clubs: [], fcmToken: token??""
           );
         
       http.Response res = await http.post(Uri.parse('$uri/api/signup'),

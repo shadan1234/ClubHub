@@ -5,7 +5,7 @@ const Application = require('../models/application');
 const User = require('../models/user');
 const Club = require('../models/club');
 const auth = require('../middlewares/auth');
-const isClubManager = require('../middlewares/application');
+const isClubManager = require('../middlewares/club_manager');
 
 
 
@@ -45,6 +45,16 @@ applicationRouter.post('/applications/:applicationId/accept', auth, isClubManage
   try {
     const application = await Application.findById(applicationId);
     application.status = 'accepted';
+    let user=await User.findById(application.userId);
+  
+  
+
+    if (!user.clubs.includes(application.clubId)) {
+      user.clubs.push(application.clubId);
+    }
+
+    await user.save();
+
     await application.save();
     res.status(200).json({ message: 'Application accepted' });
   } catch (error) {

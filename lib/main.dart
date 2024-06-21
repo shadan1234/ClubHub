@@ -5,14 +5,24 @@ import 'package:clubhub/features/auth/services/auth_service.dart';
 import 'package:clubhub/features/club_manager/screens/application_screen.dart';
 import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/onboarding/screens/onboarding.dart';
+import 'package:clubhub/firebase_options.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:clubhub/router.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async{
+   WidgetsFlutterBinding.ensureInitialized();
+
+await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
+
   runApp(
+    
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
@@ -40,6 +50,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    
     SizeConfig().init(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,

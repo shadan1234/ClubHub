@@ -7,7 +7,7 @@ const auth = require("../middlewares/auth");
 
 authRouter.post("/api/signup", async (req, res) => {
   try {
-    const { name, email, password ,type,clubOwned} = req.body;
+    const { name, email, password ,type,clubOwned, fcmToken } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res
@@ -22,6 +22,7 @@ authRouter.post("/api/signup", async (req, res) => {
       name,
       type:type || 'user',
        clubOwned:clubOwned||'',
+       fcmToken
     });
     
     user = await user.save();

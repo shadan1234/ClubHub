@@ -1,5 +1,6 @@
 import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/features/club_manager/screens/application_screen.dart';
+import 'package:clubhub/features/club_manager/screens/notification.dart';
 import 'package:clubhub/features/explore/screens/explore_screen.dart';
 import 'package:clubhub/features/profile/screens/profile_screen.dart';
 import 'package:clubhub/features/super_admin/screens/create_club_screen.dart';
@@ -26,6 +27,7 @@ class _ClubManagerBottomBarState extends State<ClubManagerBottomBar> {
     super.initState();
     pages = [
       ClubManagerApplicationsScreen(clubId: widget.clubId),
+      ClubManagerNotificationScreen(),
       const ProfileScreen(),
     ];
   }
@@ -45,12 +47,12 @@ class _ClubManagerBottomBarState extends State<ClubManagerBottomBar> {
           animationDuration: const Duration(milliseconds: 300),
           items: [
             const Icon(
-              Icons.explore,
+              Icons.assignment ,
               size: 26,
               color: Colors.white,
             ),
             const Icon(
-              Icons.create,
+              Icons.send,
               size: 26,
               color: Colors.white,
             ),
