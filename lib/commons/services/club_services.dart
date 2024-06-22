@@ -35,6 +35,35 @@ class ClubServices {
 
     return clubs;
   }
+    Future<List<Club>> fetchClubsForUser({
+    required BuildContext context,
+    
+  }) async { final userProvider = Provider.of<UserProvider>(context, listen: false);
+  List<Club>clubs=[];
+  try {
+    final response = await http.get(Uri.parse('$uri/fetch-user-clubs'), 
+        headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': userProvider.user.token,
+      },
+        );
+        print(response.body);
+        if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      if (jsonResponse['clubs'] != null) {
+        for (var clubJson in jsonResponse['clubs']) {
+          clubs.add(Club.fromMap(clubJson));
+        }
+      }
+    } 
+
+   
+        httpErrorHandle(response: response, context: context, onSuccess: (){});
+  } catch (e) {
+    showSnackBar(context, e.toString());
+  }
+    return clubs;
+  }
   Future<void> createClub({
     required BuildContext context,
     required String nameOfClub,

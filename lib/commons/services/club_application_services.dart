@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
 import 'package:clubhub/models/applications.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:clubhub/providers/user_provider.dart';
@@ -104,4 +106,5 @@ class ClubApplicationServices {
       );
     }
   }
+
 }

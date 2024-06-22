@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class ClubDetailScreen extends StatefulWidget {
   static const String routeName='/Clubs-Details-Screen';
   final Club club;
-
+  
   ClubDetailScreen({super.key, required this.club});
 
   @override
@@ -19,14 +19,33 @@ class ClubDetailScreen extends StatefulWidget {
 
 class _ClubDetailScreenState extends State<ClubDetailScreen> {
   final ClubApplicationServices clubApplicationServices=ClubApplicationServices();
+bool show=true;
+  @override
+  void initState() {
+   
+    super.initState();
+  }
   void applyForClub(String name){
     clubApplicationServices.applyForClub(context: context, clubId: widget.club.id, name:name );
   }
 
+  void _checkIfAlreadyAMember(UserProvider userProvider){
+     List<String>clubs=userProvider.user.clubs;
+      for(int i=0;i<clubs.length;i++){
+        if(clubs[i]==widget.club.id){
+          show=false;
+          break;
+        }
+      }
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider=Provider.of<UserProvider>(context,listen: false);
-   
+    _checkIfAlreadyAMember(userProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.club.nameOfClub),
@@ -89,7 +108,7 @@ class _ClubDetailScreenState extends State<ClubDetailScreen> {
               ),
             ),
             SizedBox(height: 40),
-            if(userProvider.user.type=='user')
+            if(userProvider.user.type=='user' &&show)
             Center(
               child: ElevatedButton(
                 onPressed: () {

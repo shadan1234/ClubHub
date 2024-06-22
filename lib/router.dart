@@ -5,6 +5,7 @@ import 'package:clubhub/features/auth/screens/create_account_screen.dart';
 import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/club_manager/screens/application_screen.dart';
 import 'package:clubhub/features/club_manager/screens/notification.dart';
+import 'package:clubhub/features/home_users/screens/home_screen.dart';
 import 'package:clubhub/features/profile/screens/profile_screen.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:clubhub/models/club.dart';
@@ -49,7 +50,9 @@ case BottomBar.routeName:
            case ClubManagerNotificationScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) =>  ClubManagerNotificationScreen());
-          
+            case HomeScreen.routeName:
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) =>  HomeScreen());
     default:
       return MaterialPageRoute(
           settings: routeSettings,
