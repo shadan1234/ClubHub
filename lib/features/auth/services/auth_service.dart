@@ -79,7 +79,7 @@ class AuthService {
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
-
+     
       // print(res.body);
       httpErrorHandle(
           response: res,
@@ -88,7 +88,7 @@ class AuthService {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
            await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-
+   
             Navigator.pushNamedAndRemoveUntil(
               context,
               User.fromJson(res.body).type=='user'?

@@ -14,6 +14,10 @@ const notificationSchema = new mongoose.Schema({
 
   clubId: { type: mongoose.Schema.Types.ObjectId, ref: "Club", required: true },
   createdAt: { type: Date, default: Date.now },
+  image:{
+    type:String,
+    required:true
+  }
 });
 
 const Notification = mongoose.model("Notification", notificationSchema);

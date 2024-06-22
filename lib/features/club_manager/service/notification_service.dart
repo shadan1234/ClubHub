@@ -20,7 +20,7 @@ class NotificationService {
   }) async {
      final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      NotificationModel notification=NotificationModel(id: '', title: title, message: message, clubId: clubId, recipientType: recipientType, createdAt: DateTime.now()
+      NotificationModel notification=NotificationModel(id: '', title: title, message: message, clubId: clubId, recipientType: recipientType, createdAt: DateTime.now(), image: ''
 
       );
 

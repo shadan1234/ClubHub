@@ -5,6 +5,7 @@ const admin = require('firebase-admin');
 const auth = require('../middlewares/auth');
 const isClubManager = require('../middlewares/club_manager');
 const notificationRouter = express.Router();
+const Club=require('../models/club')
 
 const serviceAccount = require('../config/clubhub-c4d71-firebase-adminsdk-b5965-c959ed7bcb.json');
 admin.initializeApp({
@@ -14,7 +15,8 @@ admin.initializeApp({
 
 notificationRouter.post('/send-notification', auth, isClubManager, async (req, res) => {
   const { recipientType, title, message, clubId } = req.body;
-
+   const club= await Club.findById(clubId);
+  //  console.log(club);
   try {
     let recipients = [];
     const listOfUsers = await User.find();
@@ -28,13 +30,14 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
     }
 
     const fcmTokens = recipients.map(user => user.fcmToken).filter(token => token);
-
+    // console.log(club.image);
     const notification = new Notification({
       recipientType,
       title,
       message,
       clubId,
-      createdAt: new Date()
+      createdAt: new Date(),
+      image:club.image
     });
 
     await notification.save();
