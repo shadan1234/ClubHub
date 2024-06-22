@@ -1,3 +1,4 @@
+import 'package:clubhub/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:clubhub/features/club_manager/service/notification_service.dart';
 import 'package:clubhub/models/notification.dart';
@@ -27,7 +28,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notifications'),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.primary,
+        centerTitle: true,
         elevation: 0,
       ),
       body: notifications == null
@@ -83,4 +85,3 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 }
-  
