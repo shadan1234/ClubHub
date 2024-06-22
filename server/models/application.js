@@ -23,6 +23,14 @@ const applicationSchema = mongoose.Schema({
   name:{
     type:String,
     required:true,
+  },
+  document:{
+    type:String,
+    required:true,
+  },
+  description:{
+    type:String,
+    required:true,
   }
 });
 

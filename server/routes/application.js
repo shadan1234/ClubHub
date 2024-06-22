@@ -13,11 +13,11 @@ const isClubManager = require('../middlewares/club_manager');
 
 // Submit an application
 applicationRouter.post('/apply', auth, async (req, res) => {
-  const { clubId, name } = req.body;
+  const { clubId, name,description,document } = req.body;
   const userId = req.user;
 
   try {
-    const newApplication = new Application({ userId, clubId,name });
+    const newApplication = new Application({ userId, clubId,name,description,document });
     await newApplication.save();
     res.status(201).json({ message: 'Application submitted' });
   } catch (error) {

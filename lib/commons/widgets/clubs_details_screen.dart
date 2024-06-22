@@ -1,5 +1,6 @@
 import 'package:clubhub/commons/services/club_application_services.dart';
 import 'package:clubhub/commons/services/club_services.dart';
+import 'package:clubhub/features/home_users/screens/application_screen.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,8 @@ bool show=true;
     super.initState();
   }
   void applyForClub(String name){
-    clubApplicationServices.applyForClub(context: context, clubId: widget.club.id, name:name );
+    Navigator.pushNamed(context, ApplicationScreen.routeName,arguments:  widget.club);
+    // clubApplicationServices.applyForClub(context: context, clubId: widget.club.id, name:name );
   }
 
   void _checkIfAlreadyAMember(UserProvider userProvider){

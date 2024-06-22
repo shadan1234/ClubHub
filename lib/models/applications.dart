@@ -8,6 +8,8 @@ class Application {
   String status; 
   final DateTime appliedAt;
   final String name;
+  final String description;
+  final String document;
 
   Application( {
     required this.id,
@@ -15,7 +17,9 @@ class Application {
     required this.clubId,
     required this.status,
     required this.appliedAt,
-    required this.name
+    required this.name,
+    required this.description,
+    required this.document,
   });
 
 
@@ -27,7 +31,9 @@ class Application {
       'clubId': clubId,
       'status': status,
       'appliedAt': appliedAt.toIso8601String(),
-      'name':name
+      'name':name,
+      'description':description,
+      'document':document
     };
   }
 
@@ -38,7 +44,9 @@ class Application {
       clubId: map['clubId'] as String,
       status: map['status'] as String,
       appliedAt: DateTime.parse(map['appliedAt']),
-      name: map['name'] as String
+      name: map['name'] as String,
+      description: map['description'] as String,
+      document:map['document'] as String,
     );
   }
 

@@ -12,13 +12,13 @@ Future<File?> pickImage() async {
   try {
 
 
-    print('vah eih');
+ 
     var file = await FilePicker.platform.pickFiles(
       type: FileType.image,
     );
     if (file != null && file.files.isNotEmpty) {
       image = File(file.files.single.path!);
-      print("File selected: ${file.files.single.path}");
+     
     } else {
       print("No file selected");
     }
@@ -27,3 +27,26 @@ Future<File?> pickImage() async {
   }
   return image;
 }
+
+Future<File?> pickPdfFile() async {
+  File? pdf;
+  try {
+
+
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+   
+    if (result != null && result.files.isNotEmpty) {
+      pdf = File(result.files.single.path!);
+     
+    } else {
+      print("No file selected");
+    }
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+  return pdf;
+}
+
