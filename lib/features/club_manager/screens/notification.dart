@@ -21,7 +21,7 @@ class _ClubManagerNotificationScreenState extends State<ClubManagerNotificationS
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
-
+  
     return Scaffold(
       appBar: AppBar(
         title: Text('Send Message'),

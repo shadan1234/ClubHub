@@ -48,17 +48,14 @@ dependencies:
   firebase_messaging: ^15.0.1
   path_provider: ^2.1.3
   easy_pdf_viewer: ^1.0.8
+
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.13.1"
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icon/clubhub.png"
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
