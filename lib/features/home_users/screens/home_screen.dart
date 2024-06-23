@@ -1,6 +1,7 @@
 
 import 'package:clubhub/commons/services/club_services.dart';
 import 'package:clubhub/constants/colors.dart';
+import 'package:clubhub/features/home_users/widgets/clubcard_members.dart';
 import 'package:clubhub/models/club.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
@@ -36,7 +37,7 @@ setState(() {
      final user=Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome , ${user.name}'),
+        title: Text('Welcome , ${user.name}', style: TextStyle(color: Colors.white),),
         centerTitle: true, 
         backgroundColor: AppColors.primary,
       ),
@@ -44,7 +45,7 @@ setState(() {
       ListView.builder(
         itemCount: clubs!.length,
         itemBuilder: (context,index){
-        return ClubCard(club: clubs![index] ,);
+        return ClubCardMembers(club: clubs![index] ,);
       })
       ,
     );

@@ -7,6 +7,7 @@ const adminRouter=require("./routes/admin");
 const userRouter = require("./routes/user");
 const applicationRouter = require("./routes/application");
 const notifcationRouter = require("./routes/notification");
+const teamRouter=require("./routes/teams");
 // const productRouter = require("./routes/product");
 // const userRouter = require("./routes/user");
 
@@ -24,7 +25,7 @@ app.use(adminRouter);
 app.use(applicationRouter);
 app.use(userRouter); 
 app.use(notifcationRouter);
-
+app.use(teamRouter);
 
 
 // Connections

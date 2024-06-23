@@ -1,6 +1,6 @@
 import 'package:clubhub/commons/services/club_application_services.dart';
 import 'package:clubhub/commons/services/club_services.dart';
-import 'package:clubhub/features/home_users/screens/application_screen.dart';
+import 'package:clubhub/features/explore/screens/application_screen.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
