@@ -70,7 +70,7 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
         tokens: fcmTokens,
         notification: payload.notification,
       });
-
+console.log(fcmTokens);
       console.log('Successfully sent message:', response);
     }
 
