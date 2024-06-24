@@ -7,10 +7,11 @@ const isClubManager = require('../middlewares/club_manager');
 const notificationRouter = express.Router();
 const Club=require('../models/club')
 
+
 const serviceAccount = require('../config/clubhub-c4d71-firebase-adminsdk-b5965-c959ed7bcb.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://clubhub-c4d71-default-rtdb.firebaseio.com/' // replace with your database URL
+  databaseURL: "https://clubhub-c4d71-default-rtdb.firebaseio.com/"
 });
 
 notificationRouter.post('/send-notification', auth, isClubManager, async (req, res) => {
@@ -48,9 +49,9 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
         body: message,
       },
     };
-
+ console.log(fcmTokens);
     if (fcmTokens.length > 0) {
-      const response = await admin.messaging().sendMulticast({
+      const response = await admin.messaging().sendEachForMulticast({
         tokens: fcmTokens,
         notification: payload.notification,
       });
@@ -83,5 +84,15 @@ notificationRouter.get('/fetch-notifications', auth, async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+notificationRouter.post('/update-fcm-token', auth, async (req, res) => {
+  const { fcmToken } = req.body;
+  const userId = req.user;
 
+  try {
+    await User.findByIdAndUpdate(userId, { fcmToken });
+    res.status(200).send('FCM token updated successfully');
+  } catch (error) {
+    res.status(500).send('Failed to update FCM token');
+  }
+});
 module.exports = notificationRouter;

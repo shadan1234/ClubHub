@@ -8,6 +8,7 @@ import 'package:clubhub/features/auth/screens/login_screen.dart';
 import 'package:clubhub/features/club_manager/screens/application_screen.dart';
 import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
+import 'package:clubhub/main.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -32,7 +33,7 @@ class AuthService {
   
   ) async {
      String? token = await FirebaseMessaging.instance.getToken();
-    print("FCM Token: $token");
+    
    
     try {
       User user = User(
@@ -130,6 +131,7 @@ class AuthService {
             });
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
+        setupFirebaseMessaging(context);
       }
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -147,4 +149,46 @@ class AuthService {
 
 }
 
+void setupFirebaseMessaging(BuildContext context) async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not accepted permission');
+  }
+
+  String? token = await messaging.getToken();
+  if (token != null) {
+     sendFCMTokenToServer(token,context);
+  }
+
+  // Handle token refresh
+  FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
+  
+    sendFCMTokenToServer(newToken,context);
+  });
+}
+
+
+void sendFCMTokenToServer(String token,BuildContext context) async {
+ final UserProvider userProvider=Provider.of<UserProvider>(context,listen:false);
+  final response = await http.post(
+    Uri.parse('$uri/update-fcm-token'),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': userProvider.user.token, 
+    },
+    body: jsonEncode({'fcmToken': token}),
+  );
+
+
+}

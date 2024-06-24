@@ -9,12 +9,13 @@ const applicationRouter = require("./routes/application");
 const notifcationRouter = require("./routes/notification");
 const teamRouter=require("./routes/teams");
 const messageRouter =require("./routes/message");
-
+require('dotenv').config();
 // INIT 
-const PORT = process.env.PORT ||  3000; // convention to use 3000 can be any no.
+const PORT = process.env.PORT ||  3000; 
 
-const app = express(); // express initialization
-const DB="mongodb+srv://superAdmin:superAdmin123@cluster0.adtmt60.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const app = express(); 
+const dbUrl = process.env.DATABASE_URL;
+
 
 
 app.use(express.json());
@@ -28,7 +29,7 @@ app.use(teamRouter);
 app.use(messageRouter);
 
 // Connections
- mongoose.connect(DB).then(()=>{
+ mongoose.connect(dbUrl).then(()=>{
     console.log("Successfully connected");
  })
  .catch((e)=>{console.log(e);})
