@@ -18,9 +18,7 @@ const serviceAccount = {
   token_uri: process.env.FIREBASE_TOKEN_URI,
   auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
   client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
-  universe_domain:process.env.universe_domain
 };
-
 
 if (!serviceAccount.private_key) {
   throw new Error("FIREBASE_PRIVATE_KEY environment variable is missing or empty.");
@@ -71,8 +69,16 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
         tokens: fcmTokens,
         notification: payload.notification,
       });
-console.log(fcmTokens);
+
+      response.responses.forEach((resp, idx) => {
+        if (!resp.success) {
+          console.error(`Failed to send to ${fcmTokens[idx]}:`, resp.error);
+        }
+      });
+
       console.log('Successfully sent message:', response);
+    } else {
+      console.log('No valid FCM tokens to send notifications to.');
     }
 
     res.status(200).send({ success: true, message: 'Notification sent successfully.' });
