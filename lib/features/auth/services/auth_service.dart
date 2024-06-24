@@ -188,7 +188,8 @@ void sendFCMTokenToServer(String token,BuildContext context) async {
       'x-auth-token': userProvider.user.token, 
     },
     body: jsonEncode({'fcmToken': token}),
-  );
 
+  );
+ print(response.body);
 
 }
