@@ -18,6 +18,11 @@ dotenv.config();
 const PORT = process.env.PORT || 3000; 
 const dbUrl = process.env.DATABASE_URL;
 
+// Ensure DATABASE_URL is loaded
+if (!dbUrl) {
+  throw new Error("DATABASE_URL is not defined in the environment variables.");
+}
+
 const app = express();
 
 // Middleware
