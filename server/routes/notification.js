@@ -5,14 +5,13 @@ const admin = require('firebase-admin');
 const auth = require('../middlewares/auth');
 const isClubManager = require('../middlewares/club_manager');
 const notificationRouter = express.Router();
-const Club=require('../models/club')
-
+const Club = require('../models/club');
 
 const serviceAccount = {
   type: process.env.FIREBASE_TYPE,
   project_id: process.env.FIREBASE_PROJECT_ID,
   private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-  private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  private_key: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : undefined,
   client_email: process.env.FIREBASE_CLIENT_EMAIL,
   client_id: process.env.FIREBASE_CLIENT_ID,
   auth_uri: process.env.FIREBASE_AUTH_URI,
@@ -20,15 +19,20 @@ const serviceAccount = {
   auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
   client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
 };
+
+if (!serviceAccount.private_key) {
+  throw new Error("FIREBASE_PRIVATE_KEY environment variable is missing or empty.");
+}
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://clubhub-c4d71-default-rtdb.firebaseio.com/"
 });
 
+// Example routes (existing code)
 notificationRouter.post('/send-notification', auth, isClubManager, async (req, res) => {
   const { recipientType, title, message, clubId } = req.body;
-   const club= await Club.findById(clubId);
-  //  console.log(club);
+  const club = await Club.findById(clubId);
   try {
     let recipients = [];
     const listOfUsers = await User.find();
@@ -42,14 +46,13 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
     }
 
     const fcmTokens = recipients.map(user => user.fcmToken).filter(token => token);
-    // console.log(club.image);
     const notification = new Notification({
       recipientType,
       title,
       message,
       clubId,
       createdAt: new Date(),
-      image:club.image
+      image: club.image
     });
 
     await notification.save();
@@ -60,7 +63,7 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
         body: message,
       },
     };
- console.log(fcmTokens);
+
     if (fcmTokens.length > 0) {
       const response = await admin.messaging().sendEachForMulticast({
         tokens: fcmTokens,
@@ -89,12 +92,13 @@ notificationRouter.get('/fetch-notifications', auth, async (req, res) => {
         { clubId: { $in: user.clubs } },
       ],
     }).sort({ createdAt: -1 });
-// console.log(notifications);
+
     res.status(200).send(notifications);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 });
+
 notificationRouter.post('/update-fcm-token', auth, async (req, res) => {
   const { fcmToken } = req.body;
   const userId = req.user;
@@ -106,4 +110,5 @@ notificationRouter.post('/update-fcm-token', auth, async (req, res) => {
     res.status(500).send('Failed to update FCM token');
   }
 });
+
 module.exports = notificationRouter;
