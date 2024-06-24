@@ -10,14 +10,16 @@ const notifcationRouter = require("./routes/notification");
 const teamRouter=require("./routes/teams");
 const messageRouter =require("./routes/message");
 require('dotenv').config();
-// INIT 
+const cors = require('cors');
+
+
 const PORT = process.env.PORT ||  3000; 
 
 const app = express(); 
 const dbUrl = process.env.DATABASE_URL;
 
 
-
+app.use(cors());
 app.use(express.json());
 app.use(authRouter);
 app.use(profileRouter);

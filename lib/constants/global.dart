@@ -1,6 +1,6 @@
 
 
-String uri = 'https://club-5xg42w5fn-shadan-hussains-projects.vercel.app/';
+String uri = 'https://club-hub-ochre.vercel.app';
 class GlobalVariables{
 
 }
