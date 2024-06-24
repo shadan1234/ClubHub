@@ -8,8 +8,7 @@ const userRouter = require("./routes/user");
 const applicationRouter = require("./routes/application");
 const notifcationRouter = require("./routes/notification");
 const teamRouter=require("./routes/teams");
-// const productRouter = require("./routes/product");
-// const userRouter = require("./routes/user");
+const messageRouter =require("./routes/message");
 
 // INIT 
 const PORT = process.env.PORT ||  3000; // convention to use 3000 can be any no.
@@ -26,7 +25,7 @@ app.use(applicationRouter);
 app.use(userRouter); 
 app.use(notifcationRouter);
 app.use(teamRouter);
-
+app.use(messageRouter);
 
 // Connections
  mongoose.connect(DB).then(()=>{

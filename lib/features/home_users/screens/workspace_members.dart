@@ -1,3 +1,4 @@
+import 'package:clubhub/features/messaging_common.dart';
 import 'package:flutter/material.dart';
 import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/features/home_users/screens/teams_screen_users.dart';
@@ -29,15 +30,16 @@ class _WorkSpaceMembersState extends State<WorkSpaceMembers>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primary, // Set primary color for the app bar
+        backgroundColor: AppColors.primary, 
         title: Text(
           'Club Activities',
-          style: TextStyle(color: Colors.white), // Title text color
+          style: TextStyle(color: Colors.white), 
         ),
         bottom: TabBar(
+
           controller: _tabController,
-          labelColor: Colors.white, // Selected tab label color
-          unselectedLabelColor: Colors.white.withOpacity(0.7), // Unselected tab label color
+          labelColor: Colors.white, 
+          unselectedLabelColor: Colors.white.withOpacity(0.7), 
           
           tabs: [
             Tab(text: 'Teams'),
@@ -49,8 +51,9 @@ class _WorkSpaceMembersState extends State<WorkSpaceMembers>
         controller: _tabController,
         children: [
           TeamsMemberScreen(clubId: widget.clubId),
-          // Add more TabBarView children for each tab
-          // Example: MessagingScreen(),
+          MessagingScreen(
+            clubId: widget.clubId,
+          )
         ],
       ),
     );

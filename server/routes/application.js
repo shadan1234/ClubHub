@@ -1,4 +1,3 @@
-// routes/applicationRouter.js
 const express = require('express');
 const applicationRouter = express.Router();
 const Application = require('../models/application');

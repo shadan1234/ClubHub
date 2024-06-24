@@ -7,7 +7,7 @@ const auth = require("../middlewares/auth");
 
 profileRouter.post("/update-profile-image", auth, async (req, res) => {
     const {imageUrl}=req.body;
-     user = await User.findById(req.user);
+   const  user = await User.findById(req.user);
     user.image=imageUrl;
     user = await user.save();
     
