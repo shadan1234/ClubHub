@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:clubhub/constants/error_handling.dart';
@@ -27,7 +29,7 @@ class MessageServices{
         },
         body: messages.toJson()
         );
-        print(res.body);
+        // print(res.body);
         httpErrorHandle(response: res, context: context, onSuccess: (){
           showSnackBar(context, 'Message sent');
         });
@@ -51,7 +53,7 @@ class MessageServices{
           'x-auth-token':userProvider.user.token
          }
          );
-         print(res.body);
+        //  print(res.body);
          List<dynamic> decodedJson=jsonDecode(res.body);
         messages= decodedJson.map((unit)=> Message.fromMap(unit as Map<String,dynamic>)).toList();
          httpErrorHandle(response: res, context: context, onSuccess: (){

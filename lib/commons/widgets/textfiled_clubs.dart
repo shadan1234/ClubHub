@@ -14,7 +14,7 @@ class TextFieldClubs extends StatelessWidget {
                 decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: labelText,
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {

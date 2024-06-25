@@ -19,9 +19,10 @@ Future<File?> pickImage() async {
     if (file != null && file.files.isNotEmpty) {
       image = File(file.files.single.path!);
      
-    } else {
-      print("No file selected");
-    }
+    } 
+    // else {
+    //   print("No file selected");
+    // }
   } catch (e) {
     debugPrint(e.toString());
   }
@@ -41,9 +42,10 @@ Future<File?> pickPdfFile() async {
     if (result != null && result.files.isNotEmpty) {
       pdf = File(result.files.single.path!);
      
-    } else {
-      print("No file selected");
-    }
+    } 
+    // else {
+    //   print("No file selected");
+    // }
   } catch (e) {
     debugPrint(e.toString());
   }

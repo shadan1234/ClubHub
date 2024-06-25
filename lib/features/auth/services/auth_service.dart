@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:clubhub/constants/bottom_page.dart';
@@ -5,10 +7,8 @@ import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
 import 'package:clubhub/constants/utils.dart';
 import 'package:clubhub/features/auth/screens/login_screen.dart';
-import 'package:clubhub/features/club_manager/screens/application_screen.dart';
 import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
-import 'package:clubhub/main.dart';
 import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -152,19 +152,19 @@ class AuthService {
 void setupFirebaseMessaging(BuildContext context) async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  NotificationSettings settings = await messaging.requestPermission(
+   await messaging.requestPermission(
     alert: true,
     badge: true,
     sound: true,
   );
 
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('User granted permission');
-  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    print('User granted provisional permission');
-  } else {
-    print('User declined or has not accepted permission');
-  }
+  // if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  //   print('User granted permission');
+  // } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+  //   print('User granted provisional permission');
+  // } else {
+  //   print('User declined or has not accepted permission');
+  // }
 
   String? token = await messaging.getToken();
   if (token != null) {
@@ -181,7 +181,7 @@ void setupFirebaseMessaging(BuildContext context) async {
 
 void sendFCMTokenToServer(String token,BuildContext context) async {
  final UserProvider userProvider=Provider.of<UserProvider>(context,listen:false);
-  final response = await http.post(
+ await http.post(
     Uri.parse('$uri/update-fcm-token'),
     headers: {
       'Content-Type': 'application/json',
@@ -190,6 +190,6 @@ void sendFCMTokenToServer(String token,BuildContext context) async {
     body: jsonEncode({'fcmToken': token}),
 
   );
- print(response.body);
+
 
 }

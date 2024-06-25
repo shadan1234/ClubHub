@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:io';
 import 'package:clubhub/commons/services/club_application_services.dart';
 import 'package:clubhub/commons/widgets/textfiled_clubs.dart';
@@ -6,7 +8,6 @@ import 'package:clubhub/models/club.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ApplicationScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class ApplicationScreen extends StatefulWidget {
 
 class _ApplicationScreenState extends State<ApplicationScreen> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   File? pdfFile;
   final ClubApplicationServices clubApplicationServices = ClubApplicationServices();
 
@@ -40,7 +41,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
 
   void _submitForm() {
     UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
-    print(pdfFile);
+    // print(pdfFile);
     if (_formKey.currentState!.validate()) {
       if (pdfFile != null) {
         clubApplicationServices.applyForClub(
@@ -60,7 +61,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tell About Yourself'),
+        title: const Text('Tell About Yourself'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -73,15 +74,15 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                 labelText: 'Description',
                 maxlines: 4,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _pickPDFFile,
-                child: Text('Attach Relevant Docs in Pdf'),
+                child: const Text('Attach Relevant Docs in Pdf'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),

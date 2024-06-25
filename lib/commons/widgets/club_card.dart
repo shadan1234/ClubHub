@@ -5,12 +5,12 @@ import 'package:clubhub/models/club.dart';
 class ClubCard extends StatelessWidget {
   final Club club;
 
-  ClubCard({super.key, required this.club});
+  const ClubCard({super.key, required this.club});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -19,7 +19,7 @@ class ClubCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.network(
               club.image,
               height: 200,
@@ -34,12 +34,12 @@ class ClubCard extends StatelessWidget {
               children: [
                 Text(
                   club.nameOfClub,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   'Type: ${club.type}',
                   style: TextStyle(
@@ -47,12 +47,12 @@ class ClubCard extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   club.description.length > 60
                       ? '${club.description.substring(0, 60)}...'
                       : club.description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.black87,
                   ),
@@ -65,7 +65,7 @@ class ClubCard extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, ClubDetailScreen.routeName,arguments: club);
                     },
-                    child: Text('Know More'),
+                    child: const Text('Know More'),
                   ),
                 ),
               ],

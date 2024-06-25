@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:clubhub/constants/colors.dart';
@@ -25,14 +27,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Logout"),
-          content: Text("Are you sure you want to logout?"),
+          title: const Text("Logout"),
+          content: const Text("Are you sure you want to logout?"),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -41,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.error, // Logout button color
               ),
-              child: Text("Logout"),
+              child: const Text("Logout"),
             ),
           ],
         );
@@ -54,8 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Edit Profile Picture"),
-          content: Text("Select a new profile picture from your gallery."),
+          title: const Text("Edit Profile Picture"),
+          content: const Text("Select a new profile picture from your gallery."),
           actions: [
             TextButton(
               onPressed: () async {
@@ -75,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }
                  Navigator.of(context).pop();
               },
-              child: Text("Select Image"),
+              child: const Text("Select Image"),
             ),
           ],
         );
@@ -88,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final user = Provider.of<UserProvider>(context,).user;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Account",
           style: TextStyle(color: Colors.black),
         ),
@@ -115,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   right: 4,
                   child: GestureDetector(
                     onTap: () => _showEditProfileDialog(context),
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 18,
                       backgroundColor: AppColors.accent,
                       child: Icon(
@@ -127,49 +129,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               user.name, // Replace with the actual user's name
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primaryText,
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               user.email, // Replace with the actual user's email
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 color: AppColors.secondaryText,
               ),
             ),
-            SizedBox(height: 24.0),
-            Divider(),
+            const SizedBox(height: 24.0),
+            const Divider(),
             ListTile(
-              leading: Icon(Icons.settings, color: AppColors.primary),
-              title: Text('Settings',
+              leading: const Icon(Icons.settings, color: AppColors.primary),
+              title: const Text('Settings',
                   style: TextStyle(color: AppColors.primaryText)),
               onTap: () {
                 Navigator.pushNamed(context, SettingsScreen.routeName);
               },
             ),
             ListTile(
-              leading: Icon(Icons.help, color: AppColors.primary),
-              title: Text('Help & Support',
+              leading: const Icon(Icons.help, color: AppColors.primary),
+              title: const Text('Help & Support',
                   style: TextStyle(color: AppColors.primaryText)),
               onTap: () {
                 Navigator.pushNamed(context, HelpSupportScreen.routeName);
               },
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: () => _showLogoutConfirmationDialog(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.error, // Logout button color
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               ),
-              child: Text(
+              child: const Text(
                 "Logout",
                 style: TextStyle(
                   fontSize: 16.0,

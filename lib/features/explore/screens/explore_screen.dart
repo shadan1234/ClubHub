@@ -36,7 +36,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         centerTitle: true, 
         backgroundColor: AppColors.primary,
       ),
-      body: clubs==null? Center(child: CircularProgressIndicator(),): 
+      body: clubs==null? const Center(child: CircularProgressIndicator(),): 
       ListView.builder(
         itemCount: clubs!.length,
         itemBuilder: (context,index){

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -21,7 +23,7 @@ class ClubServices {
          headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     });
-    print(res.body);
+   
     if (res.statusCode == 200) {
       final jsonResponse = jsonDecode(res.body);
       if (jsonResponse['clubs'] != null) {
@@ -47,7 +49,7 @@ class ClubServices {
         'x-auth-token': userProvider.user.token,
       },
         );
-        print(response.body);
+        // print(response.body);
         if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
       if (jsonResponse['clubs'] != null) {
@@ -83,7 +85,7 @@ class ClubServices {
         CloudinaryFile.fromFile(image.path, folder: nameOfClub),
       );
       imageUrl = res.secureUrl;
-print(imageUrl);
+// print(imageUrl);
       final body = {
         'nameOfClub': nameOfClub,
         'type': type,
@@ -102,10 +104,10 @@ print(imageUrl);
         },
         body: jsonEncode(body),
       );
- print(response.body);
+//  print(response.body);
       if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Club and manager created successfully!')),
+          const SnackBar(content: Text('Club and manager created successfully!')),
         );
       } else {
         httpErrorHandle(

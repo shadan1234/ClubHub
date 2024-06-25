@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
@@ -29,7 +31,7 @@ class TeamsService {
      
       List<dynamic> decodeJson = jsonDecode(res.body);
       users = decodeJson.map((unit) => User.fromMap(unit as Map<String, dynamic>)).toList();
-      print(users);
+   
       httpErrorHandle(response: res, context: context, onSuccess: () {});
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -55,7 +57,7 @@ class TeamsService {
     };
 
     try {
-      http.Response res = await http.post(
+     await http.post(
         Uri.parse('$uri/create-team'),
         headers: <String, String>{
           'Content-Type': 'application/json',
@@ -84,7 +86,7 @@ class TeamsService {
           'x-auth-token': userProvider.user.token,
         },
       );
-      print(res.body);
+     
       List<dynamic> decodedJson = jsonDecode(res.body);
       teams = decodedJson.map((unit) => Team.fromMap(unit as Map<String, dynamic>)).toList();
     } catch (e) {
@@ -106,7 +108,7 @@ class TeamsService {
           'x-auth-token': userProvider.user.token,
         },
       );
-      print(res.body);
+   
       List<dynamic> decodedJson = jsonDecode(res.body);
       teams = decodedJson.map((unit) => Team.fromMap(unit as Map<String, dynamic>)).toList();
     } catch (e) {

@@ -11,14 +11,12 @@ class AppTheme {
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       surface: AppColors.surface,
-      background: AppColors.background,
       error: AppColors.error,
       onPrimary: AppColors.background,
       onSecondary: AppColors.background,
       onSurface: AppColors.primaryText,
-      onBackground: AppColors.primaryText,
       onError: AppColors.background,
       brightness: Brightness.light,
-    ).copyWith(background: AppColors.background).copyWith(error: AppColors.error),
+    ).copyWith(surface: AppColors.background).copyWith(error: AppColors.error),
   );
 }

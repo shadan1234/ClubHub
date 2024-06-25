@@ -10,10 +10,10 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
         backgroundColor: AppColors.primary,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Settings Screen - Coming Soon!',
           style: TextStyle(fontSize: 18, color: AppColors.primaryText),
@@ -31,10 +31,10 @@ class HelpSupportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help & Support'),
+        title: const Text('Help & Support'),
         backgroundColor: AppColors.primary,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Help & Support Screen - Coming Soon!',
           style: TextStyle(fontSize: 18, color: AppColors.primaryText),

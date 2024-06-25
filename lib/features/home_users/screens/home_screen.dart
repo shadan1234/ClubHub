@@ -3,12 +3,10 @@ import 'package:clubhub/commons/services/club_services.dart';
 import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/features/home_users/widgets/clubcard_members.dart';
 import 'package:clubhub/models/club.dart';
-import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../commons/widgets/club_card.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName='/home-screen';
@@ -37,11 +35,11 @@ setState(() {
      final user=Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome , ${user.name}', style: TextStyle(color: Colors.white),),
+        title: Text('Welcome , ${user.name}', style: const TextStyle(color: Colors.white),),
         centerTitle: true, 
         backgroundColor: AppColors.primary,
       ),
-      body: clubs==null ?Center(child: CircularProgressIndicator(),):
+      body: clubs==null ?const Center(child: CircularProgressIndicator(),):
       ListView.builder(
         itemCount: clubs!.length,
         itemBuilder: (context,index){

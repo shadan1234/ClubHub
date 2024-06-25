@@ -1,19 +1,15 @@
-import 'package:clubhub/commons/widgets/custom_textfield.dart';
-import 'package:clubhub/commons/widgets/textfiled_clubs.dart';
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/features/club_manager/screens/create_team_details.dart';
-import 'package:clubhub/features/club_manager/screens/workspace.dart';
 import 'package:clubhub/features/club_manager/service/teams_service.dart';
-import 'package:clubhub/models/teams.dart';
-import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../models/user.dart';
 class CreateTeamTab extends StatefulWidget {
   final String clubId;
 
-  CreateTeamTab({required this.clubId});
+  const CreateTeamTab({super.key, required this.clubId});
 
   @override
   _CreateTeamTabState createState() => _CreateTeamTabState();
@@ -62,19 +58,19 @@ class _CreateTeamTabState extends State<CreateTeamTab> {
               },
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
               Navigator.pushNamed(context, CreateTeamDetails.routeName,arguments: {'selectedUserIds' :selectedUserIds, 'clubId': widget.clubId} );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor : AppColors.primary,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            child: Text('Next', style: TextStyle(fontSize: 16,color: Colors.white)),
+            child: const Text('Next', style: TextStyle(fontSize: 16,color: Colors.white)),
           ),
         ],
       ),

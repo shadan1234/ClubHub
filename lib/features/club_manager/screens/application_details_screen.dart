@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:clubhub/models/applications.dart';
@@ -9,7 +11,7 @@ class ApplicationDetailScreen extends StatelessWidget {
   final Function(String) acceptApplication;
   final Function(String) rejectApplication;
 
-  ApplicationDetailScreen({
+  const ApplicationDetailScreen({super.key, 
     required this.application,
     required this.acceptApplication,
     required this.rejectApplication,
@@ -22,7 +24,7 @@ class ApplicationDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Application Details'),
+        title: const Text('Application Details'),
         backgroundColor: AppColors.primary, // Use your custom primary color
       ),
       body: Padding(
@@ -32,29 +34,29 @@ class ApplicationDetailScreen extends StatelessWidget {
           children: [
             Text(
               'Applicant: ${application.name}',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87), // Custom font size and color
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87), // Custom font size and color
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Applied Date: $formattedDate',
               style: TextStyle(color: Colors.grey[600], fontSize: 18), // Lighter text color
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Description:',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black87), // Custom font size and color
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               application.description,
-              style: TextStyle(fontSize: 16, color: Colors.black87), // Custom text color
+              style: const TextStyle(fontSize: 16, color: Colors.black87), // Custom text color
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Document:',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black87), // Custom font size and color
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             GestureDetector(
               onTap: () async {
                 PDFDocument doc = await PDFDocument.fromURL(application.document);
@@ -63,7 +65,7 @@ class ApplicationDetailScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => PDFViewer(document: doc)),
                 );
               },
-              child: Text(
+              child: const Text(
                 'View Document',
                 style: TextStyle(
                   color: Colors.blue,
@@ -72,30 +74,30 @@ class ApplicationDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 24), // Increased space
+            const SizedBox(height: 24), // Increased space
             application.status == 'pending'
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () => acceptApplication(application.id),
-                        child: Text('Accept'),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white, backgroundColor: Colors.green, // Text color on button
                         ),
+                        child: const Text('Accept'),
                       ),
                       ElevatedButton(
                         onPressed: () => rejectApplication(application.id),
-                        child: Text('Reject'),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white, backgroundColor: Colors.red, // Text color on button
                         ),
+                        child: const Text('Reject'),
                       ),
                     ],
                   )
                 : Text(
                     'Status: ${application.status}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87), // Custom text color
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87), // Custom text color
                   ),
           ],
         ),

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:clubhub/constants/colors.dart';
 import 'package:clubhub/commons/services/club_application_services.dart';
 import 'package:clubhub/models/applications.dart';
-import 'package:clubhub/providers/user_provider.dart';
 import 'package:clubhub/features/club_manager/screens/application_details_screen.dart';
 
 class ClubManagerApplicationsScreen extends StatefulWidget {
   static const String routeName = '/club-manager-application-screen';
   final String clubId;
 
-  ClubManagerApplicationsScreen({Key? key, required this.clubId}) : super(key: key);
+  const ClubManagerApplicationsScreen({super.key, required this.clubId});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ClubManagerApplicationsScreenState createState() =>
       _ClubManagerApplicationsScreenState();
 }
@@ -83,11 +82,11 @@ class _ClubManagerApplicationsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Applications'),
+        title: const Text('Applications'),
         backgroundColor: AppColors.primary,
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: applications.length,
               itemBuilder: (context, index) {
@@ -96,25 +95,25 @@ class _ClubManagerApplicationsScreenState
                 String formattedDate =
                     DateFormat('yyyy-MM-dd').format(application.appliedAt);
                 return Card(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   elevation: 5,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Applicant: ${application.name}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                             color: Colors.black87,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           'Applied Date: $formattedDate',
                           style: TextStyle(

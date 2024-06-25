@@ -1,5 +1,4 @@
 import 'package:clubhub/constants/colors.dart';
-import 'package:clubhub/features/auth/services/auth_service.dart';
 import 'package:clubhub/features/explore/screens/explore_screen.dart';
 import 'package:clubhub/features/home_users/screens/home_screen.dart';
 import 'package:clubhub/features/notifications/screens/notifications_screen.dart';
@@ -18,10 +17,10 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _page = 0;
   List<Widget> pages = [
-    HomeScreen(),
-   ExploreScreen(),
-   NotificationScreen(),
-  ProfileScreen()
+    const HomeScreen(),
+   const ExploreScreen(),
+   const NotificationScreen(),
+  const ProfileScreen()
   ];
   void updatePage(int page) {
     setState(() {
@@ -36,8 +35,8 @@ class _BottomBarState extends State<BottomBar> {
           backgroundColor: Colors.transparent,
           buttonBackgroundColor: AppColors.primary,
           color: AppColors.primary,
-          animationDuration: Duration(milliseconds: 300),
-          items: [
+          animationDuration: const Duration(milliseconds: 300),
+          items: const [
             Icon(
               Icons.home,
               size: 26,

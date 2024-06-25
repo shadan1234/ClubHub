@@ -1,7 +1,5 @@
 import 'package:clubhub/commons/services/club_application_services.dart';
-import 'package:clubhub/commons/services/club_services.dart';
 import 'package:clubhub/features/explore/screens/application_screen.dart';
-import 'package:clubhub/models/user.dart';
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:clubhub/models/club.dart';
@@ -12,7 +10,7 @@ class ClubDetailScreen extends StatefulWidget {
   static const String routeName='/Clubs-Details-Screen';
   final Club club;
   
-  ClubDetailScreen({super.key, required this.club});
+  const ClubDetailScreen({super.key, required this.club});
 
   @override
   State<ClubDetailScreen> createState() => _ClubDetailScreenState();
@@ -54,7 +52,7 @@ bool show=true;
         backgroundColor: AppColors.primary,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,18 +62,18 @@ bool show=true;
               width: double.infinity,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Align( 
               alignment: Alignment.center,
               child: Text(
                 widget.club.nameOfClub,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Type: ${widget.club.type}',
               style: TextStyle(
@@ -83,45 +81,45 @@ bool show=true;
                 color: Colors.grey[700],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               widget.club.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Work Done by Club:',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               widget.club.workDoneByClub.isEmpty
                   ? 'No work done yet.'
                   : widget.club.workDoneByClub,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             if(userProvider.user.type=='user' &&show)
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   applyForClub(userProvider.user.name);
                 },
-                child: Text('Apply' ,style:TextStyle(fontSize: 18,color: Colors.white),),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18,color: Colors.white),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  textStyle: const TextStyle(fontSize: 18,color: Colors.white),
                 ),
+                child: const Text('Apply' ,style:TextStyle(fontSize: 18,color: Colors.white),),
               ),
             ),
           ],

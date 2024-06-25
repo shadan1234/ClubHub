@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -25,7 +27,7 @@ class ProfileServices{
         CloudinaryResponse res = await cloudinary
             .uploadFile(CloudinaryFile.fromFile(profileImage.path, folder: userProvider.user.token));
         imageUrl=(res.secureUrl);
-      print(imageUrl);
+      // print(imageUrl);
 Map<String, String> body = {
         'imageUrl': imageUrl, // Add image URL to the request body
       };
@@ -37,7 +39,7 @@ Map<String, String> body = {
         },
         body: jsonEncode(body),
       );
-      print(response.body);
+      // print(response.body);
       // one way of doing this but what if some error happens then also this gets updated that's why resp ko store karo
       User user=userProvider.user;
      User updatedUser= user.copyWith(image: imageUrl);

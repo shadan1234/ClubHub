@@ -2,7 +2,6 @@ import 'package:clubhub/constants/app_theme.dart';
 import 'package:clubhub/constants/bottom_page.dart';
 import 'package:clubhub/constants/size_config.dart';
 import 'package:clubhub/features/auth/services/auth_service.dart';
-import 'package:clubhub/features/club_manager/screens/application_screen.dart';
 import 'package:clubhub/features/club_manager/screens/club_manager_bottom_bar.dart';
 import 'package:clubhub/features/onboarding/screens/onboarding.dart';
 import 'package:clubhub/firebase_options.dart';
@@ -10,7 +9,6 @@ import 'package:clubhub/providers/user_provider.dart';
 import 'package:clubhub/router.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -66,11 +64,11 @@ class _MyAppState extends State<MyApp> {
       builder: (context, userProvider, _) {
         if (userProvider.user.token.isNotEmpty) {
           if (userProvider.user.type == 'user') {
-            return BottomBar();
+            return const BottomBar();
           } else if (userProvider.user.type == 'club-manager') {
             return ClubManagerBottomBar(clubId:  userProvider.user.clubOwned );
           } else {
-            return SuperAdminBottomBar();
+            return const SuperAdminBottomBar();
           }
         } else {
           return const OnBoardingScreen();

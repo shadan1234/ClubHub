@@ -2,12 +2,13 @@ import 'package:clubhub/features/club_manager/service/notification_service.dart'
 import 'package:clubhub/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:clubhub/models/user.dart';
 
 
+// ignore: use_key_in_widget_constructors
 class ClubManagerNotificationScreen extends StatefulWidget {
   static const String routeName='/notification-screen';
   @override
+  // ignore: library_private_types_in_public_api
   _ClubManagerNotificationScreenState createState() => _ClubManagerNotificationScreenState();
 }
 
@@ -16,7 +17,7 @@ class _ClubManagerNotificationScreenState extends State<ClubManagerNotificationS
   final TextEditingController _messageController = TextEditingController();
    final TextEditingController _titleController = TextEditingController();
  
-  NotificationService _notificationService = NotificationService();
+  final NotificationService _notificationService = NotificationService();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _ClubManagerNotificationScreenState extends State<ClubManagerNotificationS
   
     return Scaffold(
       appBar: AppBar(
-        title: Text('Send Message'),
+        title: const Text('Send Message'),
         centerTitle: true,
       ),
       body: Padding(
@@ -35,7 +36,7 @@ class _ClubManagerNotificationScreenState extends State<ClubManagerNotificationS
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ChoiceChip(
-                  label: Text('General'),
+                  label: const Text('General'),
                   selected: _selectedType == 'general',
                   onSelected: (bool selected) {
                     setState(() {
@@ -43,9 +44,9 @@ class _ClubManagerNotificationScreenState extends State<ClubManagerNotificationS
                     });
                   },
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 ChoiceChip(
-                  label: Text('Club Members'),
+                  label: const Text('Club Members'),
                   selected: _selectedType == 'club-specific',
                   onSelected: (bool selected) {
                     setState(() {
@@ -55,32 +56,32 @@ class _ClubManagerNotificationScreenState extends State<ClubManagerNotificationS
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Title',
                 border: OutlineInputBorder(),
               ),
               maxLines: 1,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _messageController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Message',
                 border: OutlineInputBorder(),
               ),
               maxLines: 3,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
                 await _notificationService.sendNotification(context: context, recipientType: _selectedType, message: _messageController.text, title: _titleController.text, clubId: user.clubOwned
                  
                 );
               },
-              child: Text('Send Message'),
+              child: const Text('Send Message'),
             ),
           ],
         ),

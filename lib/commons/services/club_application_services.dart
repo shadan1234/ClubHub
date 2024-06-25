@@ -1,16 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
-import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/global.dart';
 import 'package:clubhub/models/applications.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:clubhub/providers/user_provider.dart';
-
-import 'package:clubhub/models/club.dart';
 import 'package:clubhub/constants/utils.dart';
 
 class ClubApplicationServices {
@@ -26,14 +24,14 @@ class ClubApplicationServices {
     final CloudinaryPublic cloudinary =
         CloudinaryPublic('dwkaqsoto', 'daqdvyep');
  String document = '';
-      print('mff');
+    
     CloudinaryResponse res = await cloudinary.uploadFile(
       CloudinaryFile.fromFile(file.path,
           folder: userProvider.user.id, resourceType: CloudinaryResourceType.Auto),
     );
 
       document=(res.secureUrl);
-      print(document);
+      
 
      Application application=Application(id: '', userId: '' , clubId: clubId, status: '', appliedAt: DateTime.now(), name: name, description: description, document: document);
 
@@ -45,15 +43,15 @@ class ClubApplicationServices {
       },
       body: application.toJson()
     );
-    print(response.body);
+
 
     if (response.statusCode == 201) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Application submitted successfully!')),
+        const SnackBar(content: Text('Application submitted successfully!')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to submit application.')),
+        const SnackBar(content: Text('Failed to submit application.')),
       );
     }
   }
@@ -69,20 +67,20 @@ class ClubApplicationServices {
         'x-auth-token': userProvider.user.token,
       },
     );
- print(response.body);
+
     if (response.statusCode == 200) {
       List<dynamic> applicationsJson = json.decode(response.body);
-print(applicationsJson);
+
     List<Application> ans = applicationsJson.map((json) {
   try {
     if (json is Map<String, dynamic>) {
       return Application.fromMap(json);
     } else {
-      print('Unexpected JSON format: $json');
+      // print('Unexpected JSON format: $json');
       return null;
     }
   } catch (e) {
-    print('Error converting JSON to Application: $e');
+    // print('Error converting JSON to Application: $e');
     return null;
   }
 }).whereType<Application>().toList();
@@ -108,11 +106,11 @@ print(applicationsJson);
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Application accepted!')),
+        const SnackBar(content: Text('Application accepted!')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to accept application.')),
+        const SnackBar(content: Text('Failed to accept application.')),
       );
     }
   }
@@ -131,11 +129,11 @@ print(applicationsJson);
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Application rejected!')),
+        const SnackBar(content: Text('Application rejected!')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to reject application.')),
+        const SnackBar(content: Text('Failed to reject application.')),
       );
     }
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:clubhub/constants/error_handling.dart';
 import 'package:clubhub/constants/utils.dart';
@@ -33,7 +35,7 @@ class NotificationService {
         },
         body: notification.toJson()
       );
- print(response.body);
+//  print(response.body);
      
       httpErrorHandle(response: response, context: context, onSuccess: (){
           showSnackBar(context, 'Notification sent successfully');
@@ -57,7 +59,7 @@ Future<List<NotificationModel>> fetchNotifications({
 
         },
        );
-print(res.body);
+// print(res.body);
 List<dynamic> decodedJson= jsonDecode(res.body);
    list= (decodedJson.map((model)=>  NotificationModel.fromMap(model as Map<String,dynamic>) )).toList() ; 
    httpErrorHandle(response: res, context: context, onSuccess: (){});

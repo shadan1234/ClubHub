@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:clubhub/features/message_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,11 +12,11 @@ class MessagingScreen extends StatefulWidget {
 
   static const String routeName = '/chat';
 
-  MessagingScreen({
-    Key? key,
+  const MessagingScreen({
+    super.key,
     required this.clubId,
 
-  }) : super(key: key);
+  });
 
   @override
   _MessagingScreenState createState() => _MessagingScreenState();
@@ -67,9 +69,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
               future: _messagesFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error fetching messages'));
+                  return const Center(child: Text('Error fetching messages'));
                 } else {
                   final messages = snapshot.data ?? [];
                   return ListView.builder(
@@ -82,7 +84,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                         subtitle: Text(message.message),
                         trailing: Text(
                           message.createdAt.toLocal().toString().split(' ')[1],
-                          style: TextStyle(fontSize: 10),
+                          style: const TextStyle(fontSize: 10),
                         ),
                       );
                     },
@@ -92,7 +94,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
@@ -108,9 +110,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   color: AppColors.primary,
                   onPressed: () {_sendMessage( userProvider.user.name);},
                 ),

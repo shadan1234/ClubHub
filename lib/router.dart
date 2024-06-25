@@ -10,7 +10,6 @@ import 'package:clubhub/features/club_manager/screens/workspace.dart';
 import 'package:clubhub/features/explore/screens/application_screen.dart';
 import 'package:clubhub/features/home_users/screens/home_screen.dart';
 import 'package:clubhub/features/home_users/screens/workspace_members.dart';
-import 'package:clubhub/features/profile/screens/profile_screen.dart';
 import 'package:clubhub/features/super_admin/screens/super_admin_bottom_bar.dart';
 import 'package:clubhub/models/club.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +64,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           builder: (_) => ClubManagerNotificationScreen());
     case HomeScreen.routeName:
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => HomeScreen());
+          settings: routeSettings, builder: (_) => const HomeScreen());
     case ApplicationScreen.routeName:
       var club = routeSettings.arguments as Club;
       return MaterialPageRoute(
@@ -75,7 +74,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
               ));
     case WorkSpaceClubManager.routeName:
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => WorkSpaceClubManager());
+          settings: routeSettings, builder: (_) => const WorkSpaceClubManager());
     case CreateTeamDetails.routeName:
     final args = routeSettings.arguments as Map<String, dynamic>;
     final selectedUserIds = args['selectedUserIds'] as List<String>;

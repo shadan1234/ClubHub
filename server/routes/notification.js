@@ -70,11 +70,11 @@ notificationRouter.post('/send-notification', auth, isClubManager, async (req, r
         notification: payload.notification,
       });
 
-      response.responses.forEach((resp, idx) => {
-        if (!resp.success) {
-          console.error(`Failed to send to ${fcmTokens[idx]}:`, resp.error);
-        }
-      });
+      // response.responses.forEach((resp, idx) => {
+      //   if (!resp.success) {
+      //     console.error(`Failed to send to ${fcmTokens[idx]}:`, resp.error);
+      //   }
+      // });
 
       console.log('Successfully sent message:', response);
     } else {

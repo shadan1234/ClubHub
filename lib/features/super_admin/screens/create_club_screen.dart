@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+
 import 'dart:io';
 import 'package:clubhub/commons/services/club_services.dart';
 import 'package:clubhub/commons/widgets/textfiled_clubs.dart';
@@ -27,27 +29,27 @@ class _CreateClubScreenState extends State<CreateClubScreen> {
 
   Future<void> _pickImage() async {
     final pickedFile = await pickImage();
-    print(pickedFile);
+    // print(pickedFile);
     
     if (pickedFile != null) {
       setState(() {
         _image = pickedFile;
-        print('aballl');
-        print(_image);
+        // print('aballl');
+        // print(_image);
       });
     }
   }
 
   void _submitForm() async{
     if (_formKey.currentState!.validate()) {
-      print('123');
-      print(_image);
+      // print('123');
+      // print(_image);
  await clubServices.createClub(context: context, nameOfClub: _clubNameController.text, type: _clubTypeController.text , description: _clubDescriptionController.text, image: _image!, emailManager: _managerEmailController.text, passwordManager: _managerPasswordController.text, nameManager: _managerNameController.text);
-   print('mic');
+  //  print('mic');
    
  
           showSnackBar(context, 'Club Created Successfully');
-      print('Form submitted successfully');
+      // print('Form submitted successfully');
     }
   }
 

@@ -7,10 +7,10 @@ class WorkSpaceMembers extends StatefulWidget {
   final String clubId;
   static const String routeName = '/members-workSpace';
 
-  WorkSpaceMembers({
-    Key? key,
+  const WorkSpaceMembers({
+    super.key,
     required this.clubId,
-  }) : super(key: key);
+  });
 
   @override
   State<WorkSpaceMembers> createState() => _WorkSpaceMembersState();
@@ -31,7 +31,7 @@ class _WorkSpaceMembersState extends State<WorkSpaceMembers>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary, 
-        title: Text(
+        title: const Text(
           'Club Activities',
           style: TextStyle(color: Colors.white), 
         ),
@@ -41,7 +41,7 @@ class _WorkSpaceMembersState extends State<WorkSpaceMembers>
           labelColor: Colors.white, 
           unselectedLabelColor: Colors.white.withOpacity(0.7), 
           
-          tabs: [
+          tabs: const [
             Tab(text: 'Teams'),
             Tab(text: 'Messaging'),
           ],
