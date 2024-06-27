@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema({
 
   fcmToken:{
     type:String,
-    required:true,
+    default:""
   }
  
 
