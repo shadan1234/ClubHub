@@ -77,6 +77,7 @@ class ClubServices {
     required String passwordManager,
     required String nameManager,
   }) async {
+      String? token = await FirebaseMessaging.instance.getToken();
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       final cloudinary = CloudinaryPublic('dwkaqsoto', 'daqdvyep');
@@ -87,7 +88,7 @@ class ClubServices {
       );
       imageUrl = res.secureUrl;
 // print(imageUrl);
-  String? token = await FirebaseMessaging.instance.getToken();
+
     
       final body = {
         'nameOfClub': nameOfClub,
