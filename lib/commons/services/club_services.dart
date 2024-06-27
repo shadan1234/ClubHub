@@ -78,7 +78,7 @@ class ClubServices {
     required String nameManager,
   }) async {
       String? token = await FirebaseMessaging.instance.getToken();
-      print(token);
+      // print(token);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       final cloudinary = CloudinaryPublic('dwkaqsoto', 'daqdvyep');
