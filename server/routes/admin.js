@@ -11,12 +11,12 @@ adminRouter.post("/create-club-manager", admin, async (req, res) => {
    
     const club = new Club({ nameOfClub, type, description, image });
     const savedClub = await club.save();
-
+    const hashPassword = await bcryptjs.hash(passwordManager, 8);
 
     const user = new User({
       name: nameManager,
       email: emailManager,
-      password: passwordManager,
+      password: hashPassword,
       type: 'club-manager',
       clubOwned: savedClub._id,
       fcmToken
