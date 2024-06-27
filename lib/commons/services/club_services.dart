@@ -9,6 +9,7 @@ import 'package:clubhub/constants/utils.dart';
 import 'package:clubhub/features/auth/services/auth_service.dart';
 import 'package:clubhub/models/club.dart';
 import 'package:clubhub/providers/user_provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -86,6 +87,8 @@ class ClubServices {
       );
       imageUrl = res.secureUrl;
 // print(imageUrl);
+  String? token = await FirebaseMessaging.instance.getToken();
+    
       final body = {
         'nameOfClub': nameOfClub,
         'type': type,
@@ -94,6 +97,7 @@ class ClubServices {
         'emailManager': emailManager,
         'passwordManager': passwordManager,
         'nameManager': nameManager,
+         'fcmToken':token??""
       };
 
       final response = await http.post(

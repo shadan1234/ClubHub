@@ -5,7 +5,7 @@ const admin = require("../middlewares/admin");
 const Club = require("../models/club");
 
 adminRouter.post("/create-club-manager", admin, async (req, res) => {
-  const { nameOfClub, type, description, image, emailManager, passwordManager, nameManager } = req.body;
+  const { nameOfClub, type, description, image, emailManager, passwordManager, nameManager,fcmToken } = req.body;
 
   try {
     // Step 1: Create the club
@@ -18,7 +18,8 @@ adminRouter.post("/create-club-manager", admin, async (req, res) => {
       email: emailManager,
       password: passwordManager,
       type: 'club-manager',
-      clubOwned: savedClub._id
+      clubOwned: savedClub._id,
+      fcmToken
     });
     const savedUser = await user.save();
 
