@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middlewares/auth");
 
 profileRouter.post("/update-profile-image", auth, async (req, res) => {
-    const {imageUrl}=req.body;
-   const  user = await User.findById(req.user);
+    let {imageUrl}=req.body;
+   let  user = await User.findById(req.user);
     user.image=imageUrl;
     user = await user.save();
     
