@@ -3,6 +3,13 @@
 ## Welcome to Club Hub Readme
 Club Hub is a club management app which is designed to solve the issue faced by students , club managers and the administration . A single comprehensive app which caters all the needs.
 
+## Idea 
+I have built this app because I saw this issue of lack of exposure of clubs to college students. Many students miss out their passion and are not able to join the club which matches their passion . This app will help students as well as administration for a smoother flow. Students will have an overall idea about the club before joining it and they can see the various clubs which are present in their college.
+
+## Tech Stack
+- Frontend-> Flutter (Provider state management)
+- Backend -> MongoDb, Express.js ,Node.js ,Firebase
+
 ## What's Special
 
 Role based access control: User's can only access those features which are relevant to them . Based on their roles differnet functionality will be available.
@@ -97,10 +104,3 @@ https://youtu.be/xQs15ERwH8I
 ## Installation
 Just clone the repository and start running the app your emulator or physical device.
 
-## Tech Stack
-- Frontend-> Flutter (Provider state management)
-- Backend -> MongoDb, Express.js ,Node.js ,Firebase
-
-  
-## Idea 
-I have built this app because I saw this issue of lack of exposure to students about the various events happening in the college.
