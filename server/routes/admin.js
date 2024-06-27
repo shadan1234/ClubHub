@@ -8,11 +8,11 @@ adminRouter.post("/create-club-manager", admin, async (req, res) => {
   const { nameOfClub, type, description, image, emailManager, passwordManager, nameManager,fcmToken } = req.body;
 
   try {
-    // Step 1: Create the club
+   
     const club = new Club({ nameOfClub, type, description, image });
     const savedClub = await club.save();
 
-    // Step 2: Create the club manager
+
     const user = new User({
       name: nameManager,
       email: emailManager,
