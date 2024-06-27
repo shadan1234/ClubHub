@@ -1,5 +1,6 @@
 const express = require("express");
 const adminRouter = express.Router();
+const bcryptjs = require("bcryptjs");
 const User=require('../models/user');
 const admin = require("../middlewares/admin");
 const Club = require("../models/club");
