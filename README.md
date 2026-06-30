@@ -3,6 +3,10 @@
 ## Welcome to Club Hub Readme
 Club Hub is a club management app which is designed to solve the issue faced by students , club managers and the administration . A single comprehensive app which caters all the needs.
 
+## Current Status
+
+ClubHub was initially built to solve student organization fragmentation. As of 2026, the architecture is being updated and prepared for official donation and deployment at the NIT Rourkela Student Activity Center.
+
 ## Idea 
 I have built this app because I saw this issue of lack of exposure of clubs to college students. Many students miss out their passion and are not able to join the club which matches their passion . This app will help students as well as administration for a smoother flow. Students will have an overall idea about the club before joining it and they can see the various clubs which are present in their college.
 
